@@ -85,4 +85,4 @@ detect = "http://localhost:8000/api/detect/"
 data = {
     'url': "https://www.google.com/"
 }
-print(requests.post(detect, data=data).text)
+# print(requests.post(detect, data=data).text)
