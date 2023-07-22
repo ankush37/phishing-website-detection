@@ -5,9 +5,10 @@ import lightgbm
 import sklearn
 import warnings
 import os
+from pathlib import Path
 warnings.filterwarnings('ignore')
 
-BASE_DIR = "/app/ml/"
+BASE_DIR = str(Path(__file__).resolve().parent) + "/"
 
 with open(BASE_DIR + 'lightgbm_classifier.pkl', 'rb') as f:
     model = pickle.load(f)

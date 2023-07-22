@@ -15,8 +15,9 @@ from datetime import datetime
 from bs4 import BeautifulSoup
 from .Known_Sites import TEMPORARY_DOMAIN_PLATFORMS
 from api.models import ReportedURL
+from pathlib import Path
 
-BASE_DIR = "/app/ml/"
+BASE_DIR = str(Path(__file__).resolve().parent) + "/"
 
 def is_https(url):
     return url.startswith('https')
