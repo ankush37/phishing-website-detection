@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-!cz!*83_sip+h-t)m6ra0j&4akx&&5=)!(--jwr(c-217#os81
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["https://phishing-website-detection-production.up.railway.app"]
 
 
 # Application definition
