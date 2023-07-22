@@ -16,13 +16,14 @@ from bs4 import BeautifulSoup
 from .Known_Sites import TEMPORARY_DOMAIN_PLATFORMS
 from api.models import ReportedURL
 
+BASE_DIR = os.getcwd()
 
 def is_https(url):
     return url.startswith('https')
 
 
 def check_top1million_database(url):
-    with open('/home/ankush/Desktop/kavach/v3/ml/top-1million-sites.csv', 'r') as f:
+    with open(BASE_DIR + 'top-1million-sites.csv', 'r') as f:
         reader = csv.reader(f)
         for row in reader:
             if url in row[1] or url in "https://www."+row[1]:
@@ -37,7 +38,7 @@ def check_top1million_database_2(url):
     domain = urlparse(url).netloc
     if not domain:
         domain = url.split('/')[0]
-    with open('/home/ankush/Desktop/kavach/v3/ml/top-1million-sites.csv', 'r') as f:
+    with open(BASE_DIR + 'top-1million-sites.csv', 'r') as f:
         reader = csv.reader(f)
         for row in reader:
             if domain == row[1] or domain == "www."+row[1]:
@@ -119,7 +120,7 @@ def check_google_safe_browsing(url):
     
 def checkLocalBlacklist(url):
     # path to blacklisted sites file
-    dataset = "/home/ankush/Desktop/kavach/v3/ml/blacklisted_sites.txt"
+    dataset = BASE_DIR + "blacklisted_sites.txt"
     with open(dataset, 'r') as file:
         for line in file:
             website = line.strip()
@@ -139,7 +140,7 @@ def check_ip_in_ipsets(ip):
     ip_address = ipaddress.ip_address(ip)
 
     # Directory path where IPset files are located
-    ipset_directory = "/home/ankush/Desktop/kavach/v3/ml/blocklist-ipsets/IpSets"
+    ipset_directory = BASE_DIR + "blocklist-ipsets/IpSets"
 
     # Iterate over the files in the IPset directory with a progress bar
     for root, dirs, files in os.walk(ipset_directory):

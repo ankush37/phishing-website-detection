@@ -4,9 +4,12 @@ import pickle
 import lightgbm 
 import sklearn
 import warnings
+import os
 warnings.filterwarnings('ignore')
 
-with open('/home/ankush/Desktop/kavach/v3/ml/lightgbm_classifier.pkl', 'rb') as f:
+BASE_DIR = os.getcwd()
+
+with open(BASE_DIR + 'lightgbm_classifier.pkl', 'rb') as f:
     model = pickle.load(f)
 
 
