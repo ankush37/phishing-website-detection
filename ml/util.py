@@ -16,7 +16,7 @@ from bs4 import BeautifulSoup
 from .Known_Sites import TEMPORARY_DOMAIN_PLATFORMS
 from api.models import ReportedURL
 
-BASE_DIR = os.getcwd()
+BASE_DIR = "/app/ml/"
 
 def is_https(url):
     return url.startswith('https')

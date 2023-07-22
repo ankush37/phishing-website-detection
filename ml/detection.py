@@ -7,7 +7,7 @@ import warnings
 import os
 warnings.filterwarnings('ignore')
 
-BASE_DIR = os.getcwd()
+BASE_DIR = "/app/ml/"
 
 with open(BASE_DIR + 'lightgbm_classifier.pkl', 'rb') as f:
     model = pickle.load(f)
