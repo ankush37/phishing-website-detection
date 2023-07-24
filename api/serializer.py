@@ -22,6 +22,9 @@ class SignupSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'password': {
                 'write_only': True,
+            },
+            'name': {
+                'write_only': True,
             }
         }
 
