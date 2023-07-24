@@ -4,7 +4,7 @@ from .models import User, ReportedURL
 
 
 class URLSerializer(serializers.Serializer):
-    url = serializers.URLField(max_length=255)
+    url = serializers.CharField(max_length=255)
     confirmed = serializers.BooleanField(default=False)
 
     def validate_url(self, value):
