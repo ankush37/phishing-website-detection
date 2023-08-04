@@ -1,5 +1,6 @@
 from .serializer import URLSerializer, SignupSerializer, ReportedURLSSerializer
 from ml.detection import detect
+from ml.model.prediction import prediction
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import generics
@@ -60,3 +61,20 @@ class StatsUserView(generics.ListAPIView):
     serializer_class = ReportedURLSSerializer
     permission_classes = [IsAuthenticated]
     pagination_class = pagination.PageNumberPagination
+
+
+class DetectView2(generics.GenericAPIView):
+    serializer_class = URLSerializer
+    def post(self, request):
+        data = self.serializer_class(data=request.data)
+        if data.is_valid():
+            url = data.validated_data['url']
+            phish = detect(url)
+            output = {}
+            if phish == 0:
+                output["result"]= "legitimate"
+            else:
+                output["result"] = "phishing"
+            return Response(output)
+        else:
+            return Response(data.errors)
