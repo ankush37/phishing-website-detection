@@ -70,11 +70,6 @@ class DetectView2(generics.GenericAPIView):
         if data.is_valid():
             url = data.validated_data['url']
             phish = detect(url)
-            output = {}
-            if phish == 0:
-                output["result"]= "False"
-            else:
-                output["result"] = "True"
-            return Response(output)
+            return Response(phish)
         else:
             return Response(data.errors)
