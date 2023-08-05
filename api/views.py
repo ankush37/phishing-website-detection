@@ -69,7 +69,7 @@ class DetectView2(generics.GenericAPIView):
         data = self.serializer_class(data=request.data)
         if data.is_valid():
             url = data.validated_data['url']
-            phish = detect(url)
+            phish = prediction(url)
             return Response(phish)
         else:
             return Response(data.errors)
