@@ -211,33 +211,58 @@ class Features:
         
     def extract(self):
         l = [
-            self.domain_length(),
-            self.domain_entropy(),
-            self.query_params_count(),
-            self.path_tokens_count(),
-            self.hyphen_count(),
-            self.digits_count(),
-            self.ssl_cert(),
-            self.old(),
-            self.temporary_domain(),
-            self.mcafee_database(),
-            self.is_expired(),
-            self.script_to_body(),
-            self.number_of_hidden_tags(),
-            self.no_html(),
-            self.number_iframes(),
-            self.favicon(),
-            self.is_ip(),
-            self.page_token(),
-            self.abnormal_url(),
+            self.domain_length(), #0
+            self.domain_entropy(), #1
+            self.query_params_count(), #2
+            self.path_tokens_count(), #3
+            self.hyphen_count(), #4
+            self.digits_count(), #5
+            self.ssl_cert(), #6
+            self.old(), #7
+            self.temporary_domain(), #8
+            self.mcafee_database(), #9
+            self.is_expired(), #9
+            self.script_to_body(), #10
+            self.number_of_hidden_tags(), #11
+            self.no_html(), #12
+            self.number_iframes(), #13
+            self.favicon(), #14
+            self.is_ip(), #15
+            self.page_token(), #16
+            self.abnormal_url(), #17
         ]
         return l
     
 
 def prediction(url):
     f = Features(url).extract()
+    output_dict = {}
+
+    if f[6] in [0,1]:
+        output_dict["ssl_certificate"] = bool(f[6])
+    else:
+        output_dict["ssl_certificate"] = "invalid"
+    
+    if f[8] in [0, 1, True, False]:
+        output_dict["temporary_domain"] = bool(f[8])
+    else:
+        output_dict["temporary_domain"] = "invalid"
+    
+    if f[9] in [0, 1]:
+        output_dict["in mcafee database"] = bool(f[9])
+    else:
+        output_dict["in mcafee database"] = "invalid"
+    
+    if f[17] in [0,]:
+        output_dict["abnormal url"] = False
+
+    else:
+        output_dict["abnormal url"] = True
+        
+
     res = model.predict([f])[0]
-    return res
+    output_dict["result"] = res
+    return output_dict
 
 
 # print(prediction("https://noadifc9wdjfjkl.z13.web.core.windows.net/"))
