@@ -72,9 +72,9 @@ class DetectView2(generics.GenericAPIView):
             phish = detect(url)
             output = {}
             if phish == 0:
-                output["result"]= "legitimate"
+                output["result"]= "False"
             else:
-                output["result"] = "phishing"
+                output["result"] = "True"
             return Response(output)
         else:
             return Response(data.errors)

@@ -9,20 +9,22 @@ import requests
 from urllib.parse import urlparse
 import math
 import string
-from ssl_checker import verify_cert
+from .ssl_checker import verify_cert
 import whois
 import datetime
 from bs4 import BeautifulSoup
 import re
 import ipaddress
 from pyquery import PyQuery
+from pathlib import Path
 # from googlesearch import search
 # import tldextract
 import warnings
 warnings.filterwarnings('ignore')
 
+BASE_DIR = str(Path(__file__).parent)
 
-with open("lightgbm.pkl", "rb") as f:
+with open(BASE_DIR + "/model.pkl", "rb") as f:
     model = pickle.load(f)
 
 
@@ -224,7 +226,7 @@ class Features:
             self.number_of_hidden_tags(),
             self.no_html(),
             self.number_iframes(),
-            self.number_iframes(),
+            self.favicon(),
             self.is_ip(),
             self.page_token(),
             self.abnormal_url(),
