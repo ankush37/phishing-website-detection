@@ -253,7 +253,7 @@ def prediction(url):
     else:
         output_dict["in mcafee database"] = "invalid"
     
-    if f[17] in [0,]:
+    if f[18] in [0,]:
         output_dict["abnormal url"] = False
 
     else:
