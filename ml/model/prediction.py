@@ -261,7 +261,7 @@ def prediction(url):
         
 
     res = model.predict([f])[0]
-    output_dict["result"] = res
+    output_dict["result"] = bool(res)
     return output_dict
 
 
