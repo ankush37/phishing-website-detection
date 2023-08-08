@@ -9,7 +9,12 @@ class URLSerializer(serializers.Serializer):
 
     def validate_url(self, value):
         try:
-            r = requests.get(value, timeout=10)
+            if value.startswith("http"):
+                r = requests.get(value, timeout=10)
+            else:
+                value = "https://" + value
+                r = requests.get(value, timeout=10)
+
         except Exception as e:
             raise serializers.ValidationError("Invalid url")
         return r.url
