@@ -9,10 +9,10 @@ class URLSerializer(serializers.Serializer):
 
     def validate_url(self, value):
         try:
-            requests.get(value, timeout=10)
+            r = requests.get(value, timeout=10)
         except Exception as e:
             raise serializers.ValidationError("Invalid url")
-        return value
+        return r.url
     
 
 class SignupSerializer(serializers.ModelSerializer):
